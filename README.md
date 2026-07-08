@@ -2,6 +2,8 @@
 
 An intelligent sales forecasting, anomaly detection, and product demand segmentation pipeline built on 4 years (2015–2018) of historical Superstore retail transaction data and global video game industry sales benchmarks.
 
+🔗 **Live Deployed Dashboard**: [Streamlit Cloud](https://shiva12z-salesforecasting-shiva-krishna-sherikar-app-hwrhvw.streamlit.app/)
+
 ---
 
 ## 🏗️ Codebase Structure
@@ -59,12 +61,12 @@ jupyter notebook analysis.ipynb
 *(Alternatively, you can open `analysis.ipynb` directly in VS Code or JupyterLab and select **Run All**).*
 
 ### 6. Launch the Streamlit Dashboard
-Start the live interactive forecasting dashboard:
+Start the live interactive forecasting dashboard locally:
 
 ```bash
 streamlit run app.py
 ```
-*The dashboard will automatically open in your default browser at `http://localhost:8501`.*
+*The local dashboard will automatically open in your default browser at `http://localhost:8501`. Alternatively, you can view the live deployed version directly on [Streamlit Cloud](https://shiva12z-salesforecasting-shiva-krishna-sherikar-app-hwrhvw.streamlit.app/).*
 
 ---
 
