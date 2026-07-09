@@ -9,7 +9,8 @@ An intelligent sales forecasting, anomaly detection, and product demand segmenta
 ## 🏗️ Codebase Structure
 
 - **`analysis.ipynb`**: R&D Jupyter notebook covering EDA, stationarity testing, model training/backtesting (SARIMA, Prophet, XGBoost), anomaly detection comparison (Isolation Forest vs. Z-Score), and KMeans clustering.
-- **`app.py`**: Streamlit interactive dashboard showcasing sales trends, interactive forecasts (Prophet with backtesting metrics), anomaly details, and product demand cluster profiles.
+- **`app.py`**: Streamlit interactive dashboard showcasing sales trends, interactive forecasts (Prophet with backtesting metrics), anomaly details, and product demand cluster profiles, rendered in a high-contrast premium light theme.
+- **`summary.pdf`**: Generated business-ready executive PDF report compiling the end-to-end data cleaning details, forecasting performance comparison, anomaly insights, and inventory strategies.
 - **`refactor_notebook.py`**: Utility script to automatically update the notebook to fix XGBoost data leakage, resolve CPU count warnings, and prevent cluster label clashes.
 - **`requirements.txt`**: Package dependencies required to run the pipeline.
 - **`train.csv`**: Core dataset containing transactional retail sales.
@@ -66,12 +67,23 @@ Start the live interactive forecasting dashboard locally:
 ```bash
 streamlit run app.py
 ```
-*The local dashboard will automatically open in your default browser at `http://localhost:8501`. Alternatively, you can view the live deployed version directly on [Streamlit Cloud](https://shiva12z-salesforecasting-shiva-krishna-sherikar-app-hwrhvw.streamlit.app/).*
+*The local dashboard will automatically open in your default browser at `http://localhost:8501`. It is pre-configured with a clean, high-contrast light theme (`config.toml`) for perfect legibility across all charts and controls.*
+
+---
+
+## 🧼 Data Cleaning Pipeline
+To maintain 100% numerical consistency between the exploratory notebook and the dashboard, the following steps are enforced during loading:
+1. **Handling Missing Values**: Postal Codes in rows with missing values are filled using the modal postal code of their respective `State`.
+2. **Date Ingestion & Validation**: Order and Ship dates are parsed. Rows violating chronosequence (i.e. `Ship Date < Order Date`) are dropped.
+3. **Data Integrity Checks**: All rows with non-positive sales value (`Sales <= 0`) are filtered.
+4. **Column Pruning**: High cardinality metadata columns like `Row ID` and `Country` are removed, and data is sorted chronologically.
 
 ---
 
 ## 📈 Summary of Key Results
 
-- **Best Forecasting Model**: **XGBoost (Recursive)** achieved the lowest error metrics, yielding a **13.29% MAPE** on a 3-month holdout test set.
+- **Data Consistency**: Verified dataset size is reduced from 9,800 rows to 9,800 validated rows after data cleaning checks.
+- **Best Forecasting Model**: **XGBoost (Recursive)** achieved the lowest error metrics, yielding a **13.29% MAPE** on a 3-month holdout test set, outperforming Prophet (**20.3% MAPE**) and SARIMA.
 - **Seasonality Patterns**: Sales show a strong **Q4 surge** (driven by holiday shopping spikes) and deep contractions in **Jan-Feb** across all years.
+- **Anomaly Detection consensus**: Identified historical sales volatility spikes using Isolation Forest (ML-based) and local Rolling Z-Score (12-Week window), showing dual consensus overlap on major festive shopping weeks.
 - **Demand Clustering**: 17 sub-categories were successfully segmented into **High Volume Stable**, **Growing Demand** (Copiers), and **Low Volume Volatile** groups to guide supply chain stocking policies.
