@@ -2,7 +2,7 @@
 
 An intelligent sales forecasting, anomaly detection, and product demand segmentation pipeline built on 4 years (2015–2018) of historical Superstore retail transaction data and global video game industry sales benchmarks.
 
-🔗 **Live Deployed Dashboard**: [Streamlit Cloud](https://shiva12z-salesforecasting-shiva-krishna-sherikar-app-hwrhvw.streamlit.app/)
+🔗 **Live Deployed Dashboard**: [Streamlit Cloud](https://shiva12z-salesforecasting-shiva-krishna-sherikar-app-rbthna.streamlit.app/)
 
 ---
 
